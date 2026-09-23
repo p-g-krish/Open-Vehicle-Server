@@ -124,6 +124,8 @@ sub request
   my $port = $req->client_port;
   my $key = $host . ':' . $port;
 
+  return if ($host eq '127.0.0.1'); # Whitelist 127.0.0.1
+
   my $burst = MyConfig()->val('httpapi','ratelimit_http_burst','120');
   my $delay = MyConfig()->val('httpapi','ratelimit_http_delay','20');
   my $expire = MyConfig()->val('httpapi','ratelimit_http_expire','300');
